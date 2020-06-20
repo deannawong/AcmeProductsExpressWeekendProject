@@ -1,37 +1,31 @@
 import React, { Component } from 'react';
-
 class Create extends Component {
   constructor() {
     super();
     this.state = {
-      name: '',
+      text: '',
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
-  onChange(ev) {
-    this.setState({ [ev.target.name]: ev.target.value });
+  handleOnChange(ev) {
+    this.setState({ text: ev.target.value });
   }
-  onSubmit(ev) {
+  handleOnSubmit(ev) {
     ev.preventDefault();
-    this.props.create(this.state, this.props.history);
+    this.props.create({ name: this.state.text }, this.props.history);
   }
   render() {
-    const { name } = this.state;
-    const { onSubmit, onChange } = this;
+    const { text } = this.state;
     return (
-      <div>
-        <h2>Create A Product</h2>
-        <form onSubmit={onSubmit}>
-          <input
-            name='name'
-            onChange={onChange}
-            value={name}
-            placeholder='enter a new product'
-          />
-          <button disabled={!name}>Save</button>
-        </form>
-      </div>
+      <form onSubmit={(ev) => this.handleOnSubmit(ev)}>
+        <input
+          name='text'
+          onChange={(ev) => this.handleOnChange(ev)}
+          value={text}
+        />
+        <button disabled={!text}>Create New Product</button>
+      </form>
     );
   }
 }

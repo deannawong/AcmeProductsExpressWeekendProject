@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Link, Route } from 'react-router-dom';
 import axios from 'axios';
-//Importing components
+//Importing Smaller Components
 import Nav from './nav';
 import Home from './home';
 import Products from './products';
@@ -21,16 +21,16 @@ class App extends Component {
       this.setState({ products: res.data });
     });
   }
+
   destroy(id) {
     axios.delete(`/api/products/${id}`).then(() => {
       const filtered = this.state.products.filter((prod) => prod.id !== id);
       this.setState({ products: filtered });
     });
   }
-  create(product, history) {
-    axios.post('/api/products', product).then((res) => {
-      const products = [...this.state.products, res.data];
-      this.setState({ products });
+  create(prod, history) {
+    axios.post('/api/products', prod).then((res) => {
+      this.setState({ products: [...this.state.products, res.data] });
       history.push('/products');
     });
   }
@@ -47,16 +47,17 @@ class App extends Component {
           )}
         />
         <div id='content'>
-          <Route exact path='/' component={Home} />
+          <Route path='/' render={Home} />
           <Route
             path='/products'
             exact
             render={() => <Products destroy={destroy} products={products} />}
           />
           <Route
-            path='/products/create'
+            path='/create'
+            exact
             render={({ history }) => (
-              <Create create={create} history={history} />
+              <Create history={history} create={create} />
             )}
           />
         </div>
