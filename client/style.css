@@ -1,0 +1,45 @@
+body {
+  font-family: helvetica;
+}
+a {
+  margin-right: 10px;
+  padding: 5px;
+  border: solid 1px darkcyan;
+  border-radius: 3px;
+  text-decoration: none;
+  color: darkcyan;
+}
+
+a.active {
+  background-color: darkcyan;
+  color: white;
+}
+
+form {
+  padding: 2em;
+  border: solid 1px darkcyan;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 200px;
+}
+
+input,
+button {
+  height: 3em;
+}
+
+div#content {
+  margin-top: 3em;
+}
+
+#products li {
+  display: flex;
+  border: solid 1px darkcyan;
+  border-width: 1px 0;
+  padding: 1em;
+}
+
+#products li div {
+  flex: 1;
+}
